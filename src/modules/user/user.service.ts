@@ -6,7 +6,7 @@ import {
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { LoginDto } from '../../auth/dto/login-dto';
-import { User } from '../entities/user.entity';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
