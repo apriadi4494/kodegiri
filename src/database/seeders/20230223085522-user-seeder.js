@@ -11,8 +11,6 @@ module.exports = {
           email: 'admin@admin.com',
           password:
             '$2b$08$jwurorQhqBK7UpjJFEUXaOMONxw.ttpc7bDg96/Kad/b3j/nj5wry',
-          createdAt: new Date(),
-          updatedAt: new Date(),
         },
       ],
       {},
