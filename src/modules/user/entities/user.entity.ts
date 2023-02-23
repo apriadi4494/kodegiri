@@ -8,7 +8,7 @@ import {
 } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
 
-@Table({ tableName: 'users' })
+@Table({ tableName: 'users', timestamps: false })
 export class User extends Model {
   @PrimaryKey
   @Column({
