@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from './commons/interceptors/httpExceptionFilter';
+import { LoggerMiddleware } from './commons/logger/loggerMiddleware';
 
 @Module({
   imports: [],
@@ -12,4 +13,8 @@ import { AllExceptionsFilter } from './commons/interceptors/httpExceptionFilter'
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
