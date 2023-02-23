@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { JWT_EXPIRES, JWT_EXPIRES_REFRESH_TOKEN } from '../config/env';
+import { LoginResponse } from './dto/loginResponseDto';
 import { RefreshTokenDto } from './dto/refresh-token-dto';
-import { LoginResponse } from './interfaces/login-response-interface';
 
 @Injectable()
 export class AuthService {

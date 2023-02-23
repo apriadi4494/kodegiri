@@ -6,6 +6,8 @@ import { LoginDto } from './dto/login-dto';
 import { AuthService } from './auth-service';
 import { RefreshTokenDto } from './dto/refresh-token-dto';
 import { LocalAuthGuard } from './local-auth.guard';
+import { ApiBaseResponse } from '../commons/swagger/apiBaseResponse';
+import { LoginResponse } from './dto/loginResponseDto';
 
 @Controller('auth')
 @ApiTags('Auth Services')
@@ -16,6 +18,7 @@ export class AuthController {
   @Post('login')
   @ApiBody({ type: LoginDto })
   @UseGuards(LocalAuthGuard)
+  @ApiBaseResponse(LoginResponse)
   async login(@Res() res: Response, @Req() req) {
     const user = req.user;
     const { token, refreshToken } = await this.authService.getToken(user.id);
@@ -24,6 +27,7 @@ export class AuthController {
   }
 
   @Post('refresh-token')
+  @ApiBaseResponse(LoginResponse)
   async refreshToken(@Res() res: Response, @Body() payload: RefreshTokenDto) {
     const { token, refreshToken } = await this.authService.verifyRefreshToken(
       payload,
