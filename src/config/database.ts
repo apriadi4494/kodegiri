@@ -1,3 +1,5 @@
+import { Event } from '../modules/event/entities/event.entity';
+import { EventImage } from '../modules/event/entities/event-image.entity';
 import { User } from '../modules/user/entities/user.entity';
 
 export default (configService) => ({
@@ -7,7 +9,7 @@ export default (configService) => ({
   username: configService.get('DB_USER', 'postgres'),
   password: configService.get('DB_PASSWORD', 'postgres'),
   database: configService.get('DB_NAME', 'test'),
-  models: [User],
+  models: [User, Event, EventImage],
   autoLoadModels: true,
   synchronize: true,
   logging: true,
