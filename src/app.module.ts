@@ -1,11 +1,26 @@
 import { MiddlewareConsumer, Module, ModuleMetadata } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { AllExceptionsFilter } from './commons/interceptors/httpExceptionFilter';
 import { LoggerMiddleware } from './commons/logger/loggerMiddleware';
+import database from './config/database';
 
 const metaData: ModuleMetadata = {
-  imports: [AuthModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    SequelizeModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) =>
+        database(configService),
+    }),
+    AuthModule,
+  ],
   controllers: [],
   providers: [
     {
