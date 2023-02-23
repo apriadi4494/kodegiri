@@ -1,0 +1,9 @@
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
+
+
+module.exports = {
+   'seeders-path': path.resolve('src/database', 'seeders'),
+   'config': path.resolve('', 'config.js'),
+}
