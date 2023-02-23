@@ -1,18 +1,18 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class QueryPaginate {
-  @ApiPropertyOptional()
-  page?: number;
+  @ApiProperty({ default: 1 })
+  page: number;
+
+  @ApiProperty({ default: 5 })
+  limit: number;
 
   @ApiPropertyOptional()
-  limit?: number;
-
-  @ApiPropertyOptional({ example: 'sortBy=id:DESC' })
   sortBy?: string;
 
   @ApiPropertyOptional()
   search?: string;
 
-  @ApiPropertyOptional({ example: 'filter.age=10' })
+  @ApiPropertyOptional()
   filter?: string;
 }
