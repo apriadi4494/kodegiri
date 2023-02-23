@@ -9,16 +9,20 @@ export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
 
   async generateToken(id: string): Promise<LoginResponse> {
-    const token = await this.jwtService.signAsync(
-      { id },
-      { expiresIn: JWT_EXPIRES },
-    );
-    const refreshToken = await this.jwtService.signAsync(
-      { id },
-      { expiresIn: JWT_EXPIRES_REFRESH_TOKEN },
-    );
+    try {
+      const token = await this.jwtService.signAsync(
+        { id },
+        { expiresIn: JWT_EXPIRES },
+      );
+      const refreshToken = await this.jwtService.signAsync(
+        { id },
+        { expiresIn: JWT_EXPIRES_REFRESH_TOKEN },
+      );
 
-    return { token, refreshToken };
+      return { token, refreshToken };
+    } catch (err) {
+      throw new UnauthorizedException(err);
+    }
   }
 
   async verifyRefreshToken(payload: RefreshTokenDto): Promise<LoginResponse> {
