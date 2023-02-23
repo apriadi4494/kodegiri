@@ -5,7 +5,8 @@ export default (configService) => ({
   username: configService.get('DB_USER', 'postgres'),
   password: configService.get('DB_PASSWORD', 'postgres'),
   database: configService.get('DB_NAME', 'test'),
-  entities: [__dirname + '/../modules/*/entities/*.entity{.ts,.js}'],
+  models: [__dirname + '/../modules/*/entities/*.entity{.ts,.js}'],
+  autoLoadModels: true,
   synchronize: true,
-  logging: false,
+  logging: true,
 });

@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { AllExceptionsFilter } from './commons/interceptors/httpExceptionFilter';
 import { LoggerMiddleware } from './commons/logger/loggerMiddleware';
 import database from './config/database';
+import { UserModule } from './modules/user/user.modules';
 
 const metaData: ModuleMetadata = {
   imports: [
@@ -20,6 +21,7 @@ const metaData: ModuleMetadata = {
         database(configService),
     }),
     AuthModule,
+    UserModule,
   ],
   controllers: [],
   providers: [
